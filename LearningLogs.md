@@ -14,7 +14,7 @@ The outcome:
 ![image](https://github.com/Meltryllis628/tactical-game/assets/56423470/5827926d-1f11-4776-9536-89b85f351ac1)
 ## Day2
 ### The Map Render Manager:
-Read csv files (TODO) and generate a map on the target Tilemap.
+*Read csv files (TODO)* and generate a map on the target Tilemap.
 ### The Navigator:
 Use
 Highlight clicked tiles, the route and moving boundaries.
@@ -25,4 +25,4 @@ The **Action Point** system.
 ### Message Queue:
 Use message queue to deliver message between different managers.
 ### Decoupling：
-Decouple map generation with map rendering (TODO).
+*Decouple map generation with map rendering (TODO).*
