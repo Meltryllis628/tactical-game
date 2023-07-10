@@ -37,7 +37,7 @@ public class Navigator : MonoBehaviour {
 
     private void Update() {
         if (AcMap == null) {
-            AcMap = MapManager.Instance.GetAcMap();
+            AcMap = MapRendererManager.Instance.GetAcMap();
             rows = AcMap.GetLength(0);
             columns = AcMap.GetLength(1);
         }
@@ -232,7 +232,7 @@ public class Navigator : MonoBehaviour {
     void Start() {
         normalColor = tilemap.color;
         if (AcMap == null) {
-            AcMap = MapManager.Instance.GetAcMap();
+            AcMap = MapRendererManager.Instance.GetAcMap();
             rows = AcMap.GetLength(0);
             columns = AcMap.GetLength(1);
         }

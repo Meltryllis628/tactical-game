@@ -1,43 +1,23 @@
-﻿using System;
+﻿using Assets.Scripts;
+using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data;
-using static UnityEngine.Rendering.DebugUI.Table;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.WSA;
-using System.Xml.Schema;
-using static UnityEditor.PlayerSettings;
 
 namespace Assets.Script {
-    public class MapManager : MonoBehaviour {
-        private static MapManager instance; // 单例实例
-        public static MapManager Instance {
-            get {
-                return instance;
-            }
-        }
+    public class MapRendererManager : UnitySingleton<MapRendererManager> {
+
 
         [SerializeField] RuleTile dirtTile;
         [SerializeField] RuleTile grassTile;
         [SerializeField] RuleTile bushTile;
         public Tilemap groundMap;
-        private TilemapRenderer groundMapRenderer;
         public Tilemap objectMap;
-        private TilemapRenderer objectMapRenderer;
+        public string logText = "MapRendererManager: ";
         private int rows = 0;
         private int columns = 0;
         private TileData[,] tileDatas = null;
         private int[,] AcMap = null;
-
-        private void Awake() {
-            GenerateTileMap();
-        }
-
 
         private void CrossDemo() {
             rows = 10; columns = 12;
@@ -89,7 +69,7 @@ namespace Assets.Script {
         }
 
         private void Start() {
-            instance = this;
+            Debug.Log(Instance.logText);
             // 获取TileMap组件
             //groundMap = GetComponent<Tilemap>();
             CrossDemo();
@@ -107,14 +87,21 @@ namespace Assets.Script {
         }
 
         private void Update() {
+            while (!MessageQueue.isEmpty) {
+                Message currentMessage = MessageQueue.Pop();
+                if (currentMessage != null) {
+                    Debug.Log(logText + currentMessage.ID);
+                }
+            }
+            CrossDemo();
             GenerateTileMap();
         }
 
-        static MapManager() {
+        static MapRendererManager() {
             // 私有构造函数，防止外部创建实例
             // 进行初始化操作
         }
-        private MapManager() {
+        private MapRendererManager() {
             // 私有构造函数，防止外部创建实例
             // 进行初始化操作
         }
