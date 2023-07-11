@@ -96,14 +96,5 @@ namespace Assets.Script {
             CrossDemo();
             GenerateTileMap();
         }
-
-        static MapRendererManager() {
-            // 私有构造函数，防止外部创建实例
-            // 进行初始化操作
-        }
-        private MapRendererManager() {
-            // 私有构造函数，防止外部创建实例
-            // 进行初始化操作
-        }
     }
 }

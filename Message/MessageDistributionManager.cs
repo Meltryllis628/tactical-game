@@ -23,6 +23,8 @@ namespace Assets.Scripts {
         }
         private void Start() {
             Debug.Log(Instance.logText);
+            Save test = new TestSave();
+            test.SaveData("test1");
         }
     }
 }
