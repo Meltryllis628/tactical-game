@@ -90,7 +90,7 @@ namespace Assets.Script {
             while (!MessageQueue.isEmpty) {
                 Message currentMessage = MessageQueue.Pop();
                 if (currentMessage != null) {
-                    Debug.Log(logText + currentMessage.ID);
+                    //Debug.Log(logText + currentMessage.ID);
                 }
             }
             CrossDemo();

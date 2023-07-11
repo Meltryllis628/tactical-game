@@ -13,6 +13,8 @@ namespace Assets.Scripts {
     }
 
     public enum ObjectTileTypes {
+        None = 0,
+
         Hedge_short = 10301, 
         Hedge_tall =10901,
     }

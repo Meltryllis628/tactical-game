@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Text;
 using System.Threading.Tasks;
 using Assets.Script;
+using Assets.Scripts.SaveLoad;
 
 namespace Assets.Scripts {
     internal class MessageDistributionManager: UnitySingleton<MessageDistributionManager> {
@@ -25,6 +26,9 @@ namespace Assets.Scripts {
             Debug.Log(Instance.logText);
             Save test = new TestSave();
             test.SaveData("test1");
+            string path = test.SavePath;
+            TestSave loadedData = TestSave.LoadData<TestSave>(path);
+            Debug.Log(loadedData.Aa);
         }
     }
 }
