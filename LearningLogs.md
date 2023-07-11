@@ -26,3 +26,11 @@ The **Action Point** system.
 Use message queue to deliver message between different managers.
 ### Decoupling：
 *Decouple map generation with map rendering (TODO).*
+
+## Day4
+### Animation:
+
+![Shoot](https://github.com/Meltryllis628/tactical-game/assets/56423470/e3f99bb1-6bdc-4ac9-84d7-841d44655268)![Walk](https://github.com/Meltryllis628/tactical-game/assets/56423470/141e81aa-7558-4ced-a04e-b01efab863e9)
+
+### Save/Load:
+Using **XML** files.
