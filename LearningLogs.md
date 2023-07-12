@@ -34,3 +34,10 @@ Use message queue to deliver message between different managers.
 
 ### Save/Load:
 Using **XML** files.
+
+## Day5
+### Structure
+Maybe
+
+![image](https://github.com/Meltryllis628/tactical-game/assets/56423470/dc94ff3b-4167-4620-90a8-303c3b413a20)
+
