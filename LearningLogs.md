@@ -41,3 +41,8 @@ Maybe
 
 ![image](https://github.com/Meltryllis628/tactical-game/assets/56423470/dc94ff3b-4167-4620-90a8-303c3b413a20)
 
+### Difference Between Maps
+
+![image](https://github.com/Meltryllis628/tactical-game/assets/56423470/5b5f0b7b-87e8-440a-b1eb-0c1083d6bd0a)
+
+
