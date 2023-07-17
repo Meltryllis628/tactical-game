@@ -42,22 +42,17 @@ namespace TachGame {
 
 
 
-
-        private void Update() {
-            while (!MessageQueue.isEmpty) {
-                Message currentMessage = MessageQueue.Pop();
-                if (currentMessage != null) {
-                    //Debug.Log(logText + currentMessage.ID);
-                    if (currentMessage.ID == MessagesCode.RENDER_NEW_MAP) {
-                        map = (MapSaveData)currentMessage.Obj1;
-                        Debug.Log(logText + ": Rendering map " + map.Name);
-                        rows = map.Row;
-                        columns = map.Column;
-                        Debug.Log(logText + ": Row " + rows + ", Column " + columns);
-                        continue;
-                    }
-                }
+        public override void UpdateMessage(Message currentMessage) {
+            if (currentMessage.ID == MessagesCode.RENDER_NEW_MAP) {
+                map = (MapSaveData)currentMessage.Obj1;
+                Debug.Log(logText + ": Rendering map " + map.Name);
+                rows = map.Row;
+                columns = map.Column;
+                Debug.Log(logText + ": Row " + rows + ", Column " + columns);
             }
+        }
+
+        public override void UpdateElse() {
             GenerateTileMap();
         }
     }

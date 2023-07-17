@@ -33,36 +33,31 @@ namespace TachGame {
         }
 
 
-        private void Update() {
-            while (!MessageQueue.isEmpty) {
-                Message currentMessage = MessageQueue.Pop();
-                if (currentMessage != null) {
-                    if(currentMessage.ID == MessagesCode.READ_MAP_FROM_SAVEDATA) {
-                        if (currentMessage.Arg1 == 0) {
-                            map = (MapSaveData)currentMessage.Obj1;
-                        }
-                        if (currentMessage.Arg1 == 1) {
-                            string path = (string)currentMessage.Obj2;
-                            map = MapSaveData.LoadData<MapSaveData>(path);
-                        }
-                    }
-                    rows = map.Row;
-                    columns= map.Column;
-                    try {
-                        GenerateAcMap();
-                        map.SaveData();
-                    } catch (Exception e) {
-                        Debug.Log(e);
-                    }
-                    
+
+        public override void UpdateMessage(Message currentMessage) {
+            if (currentMessage.ID == MessagesCode.READ_MAP_FROM_SAVEDATA) {
+                if (currentMessage.Arg1 == 0) {
+                    map = (MapSaveData)currentMessage.Obj1;
                 }
-                Message message = new Message(ManagerCode.MAP_RENDERER, MessagesCode.RENDER_NEW_MAP);
-                message.Obj1 = map;
-                MessageDistributionManager.Instance.SendMessage(message);
+                if (currentMessage.Arg1 == 1) {
+                    string path = (string)currentMessage.Obj2;
+                    map = MapSaveData.LoadData<MapSaveData>(path);
+                }
             }
-            
+            rows = map.Row;
+            columns = map.Column;
+            try {
+                GenerateAcMap();
+                map.SaveData();
+            } catch (Exception e) {
+                Debug.Log(e);
+            }
         }
 
-
+        public override void UpdateElse() {
+            Message message = new Message(ManagerCode.MAP_RENDERER, MessagesCode.RENDER_NEW_MAP);
+            message.Obj1 = map;
+            MessageDistributionManager.Instance.SendMessage(message);
+        }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 namespace TachGame {
 
-    public class UnitySingleton<T> : MonoBehaviour
+    public abstract class UnitySingleton<T> : MonoBehaviour
             where T : Component {
         private static T instance;
         private MessageQueue messageQueue = new MessageQueue();
@@ -30,5 +31,18 @@ namespace TachGame {
                 Destroy(gameObject);
             }
         }
+        public void Update() {
+            while (!MessageQueue.isEmpty) {
+                Message currentMessage = MessageQueue.Pop();
+                if (currentMessage != null) {
+                    UpdateMessage(currentMessage); 
+                }
+            }
+            UpdateElse();
+        }
+        public abstract void UpdateMessage(Message currentMessage);
+
+
+        public abstract void UpdateElse();
     }
 }

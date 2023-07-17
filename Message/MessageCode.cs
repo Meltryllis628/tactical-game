@@ -56,6 +56,15 @@
          * Obj2:
          * Obj3:
          */
+        RENDER_NEW_CHARACTER = 6001
+        /*
+         * Arg1: 
+         * Arg2: 
+         * Arg3: 
+         * Obj1: string path
+         * Obj2:
+         * Obj3:
+         */
     }
 
     public enum ManagerCode {
@@ -63,6 +72,7 @@
         READER = 1000,
         WRITER = 2000,
         CHARA = 5000,
+        CHARA_RENDERER = 6000,
 
         MAP_MANAGER = 8000,
         NAVI = 7000

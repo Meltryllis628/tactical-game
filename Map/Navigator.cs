@@ -34,99 +34,6 @@ namespace TachGame {
     };
 
 
-        private void Update() {
-            if (AcMap == null) {
-                AcMap = MapManager.Instance.ACMap;
-                //rows = AcMap.GetLength(0);
-                //columns = AcMap.GetLength(1);
-            }
-
-
-            // 将鼠标点击位置转换为 Tilemap 上的世界坐标
-            Vector3 mouseWorldPos1 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3Int hoveredCell = tilemap.WorldToCell(mouseWorldPos1);
-
-
-            if (Input.GetMouseButtonDown(0)) {
-                // 将鼠标点击位置转换为 Tilemap 上的世界坐标
-                Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                Vector3Int clickedCell = tilemap.WorldToCell(mouseWorldPos);
-                if (clickedTime == 0 && tilemap.HasTile(clickedCell)) {
-                    startCell = clickedCell;
-                    clickedTime++;
-
-                    Debug.Log("Navi: startCell " + startCell + " " + GetTileAc(startCell));
-                    movingBoundary = SetMovingBoundary(startCell, ac);
-                    //Debug.Log(string.Join(", ",SetMovingBoundary(startCell, ac)));
-                }
-                if (clickedTime == 1 && clickedCell != startCell && tilemap.HasTile(clickedCell)) {
-                    if (movingBoundary.Contains(clickedCell)) {
-                        endCell = clickedCell;
-                        clickedTime++;
-                        trace = findTrace(startCell, endCell);
-                        Debug.Log("Navi: endCell " + endCell);
-                    }
-                }
-            }
-
-            if (movingBoundary != null) {
-                foreach (var cell in movingBoundary) {
-                    HighlightTiles(cell, avaliableColor);
-                }
-            }
-
-            if (hoveredCell != lastHoveredCell) {
-                // 恢复上一个格子的颜色
-                if (tilemap.HasTile(lastHoveredCell) && lastHoveredCell != startCell && lastHoveredCell != endCell) {
-                    HighlightTiles(lastHoveredCell, normalColor);
-                }
-
-                // 高亮新的格子
-                if (tilemap.HasTile(hoveredCell) && hoveredCell != startCell && hoveredCell != endCell) {
-                    if (movingBoundary != null && clickedTime == 1) {
-                        if (movingBoundary.Contains(hoveredCell)) {
-                            trace = findTrace(startCell, hoveredCell);
-                            //Debug.Log(string.Join(", ", trace));
-                        }
-                    }
-
-                }
-            }
-            if (trace != null) {
-                foreach (var cell in trace) {
-                    HighlightTiles(cell, traceColor);
-                }
-            }
-            if (clickedTime >= 1) {
-                HighlightTiles(startCell, highlightColor);
-            }
-            if (clickedTime >= 2) {
-                HighlightTiles(endCell, highlightColor);
-            }
-            HighlightTiles(hoveredCell, cursorColor);
-            lastHoveredCell = hoveredCell;
-
-            if (Input.GetMouseButtonDown(1)) {
-                if (movingBoundary != null) {
-                    foreach (var cell in movingBoundary) {
-                        HighlightTiles(cell, normalColor);
-                    }
-                }
-                if (trace != null) {
-                    foreach (var cell in trace) {
-                        HighlightTiles(cell, normalColor);
-                    }
-                }
-                HighlightTiles(startCell, normalColor);
-                HighlightTiles(endCell, normalColor);
-                startCell = new Vector3Int(9999, 9999, 9999);
-                endCell = new Vector3Int(9999, 9999, 9999);
-                movingBoundary = null;
-                trace = null;
-                clickedTime = 0;
-            }
-
-        }
 
         private void HighlightSurroundingTiles(Vector3Int clickedCell, Color color) {
             // 循环遍历周围的格子
@@ -251,6 +158,102 @@ namespace TachGame {
             }
         }
 
+        public override void UpdateMessage(Message currentMessage) {
+            throw new NotImplementedException();
+        }
+
+        public override void UpdateElse() {
+            if (AcMap == null) {
+                AcMap = MapManager.Instance.ACMap;
+                //rows = AcMap.GetLength(0);
+                //columns = AcMap.GetLength(1);
+            }
+
+
+            // 将鼠标点击位置转换为 Tilemap 上的世界坐标
+            Vector3 mouseWorldPos1 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3Int hoveredCell = tilemap.WorldToCell(mouseWorldPos1);
+
+
+            if (Input.GetMouseButtonDown(0)) {
+                // 将鼠标点击位置转换为 Tilemap 上的世界坐标
+                Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector3Int clickedCell = tilemap.WorldToCell(mouseWorldPos);
+                if (clickedTime == 0 && tilemap.HasTile(clickedCell)) {
+                    startCell = clickedCell;
+                    clickedTime++;
+
+                    Debug.Log("Navi: startCell " + startCell + " " + GetTileAc(startCell));
+                    movingBoundary = SetMovingBoundary(startCell, ac);
+                    //Debug.Log(string.Join(", ",SetMovingBoundary(startCell, ac)));
+                }
+                if (clickedTime == 1 && clickedCell != startCell && tilemap.HasTile(clickedCell)) {
+                    if (movingBoundary.Contains(clickedCell)) {
+                        endCell = clickedCell;
+                        clickedTime++;
+                        trace = findTrace(startCell, endCell);
+                        Debug.Log("Navi: endCell " + endCell);
+                    }
+                }
+            }
+
+            if (movingBoundary != null) {
+                foreach (var cell in movingBoundary) {
+                    HighlightTiles(cell, avaliableColor);
+                }
+            }
+
+            if (hoveredCell != lastHoveredCell) {
+                // 恢复上一个格子的颜色
+                if (tilemap.HasTile(lastHoveredCell) && lastHoveredCell != startCell && lastHoveredCell != endCell) {
+                    HighlightTiles(lastHoveredCell, normalColor);
+                }
+
+                // 高亮新的格子
+                if (tilemap.HasTile(hoveredCell) && hoveredCell != startCell && hoveredCell != endCell) {
+                    if (movingBoundary != null && clickedTime == 1) {
+                        if (movingBoundary.Contains(hoveredCell)) {
+                            trace = findTrace(startCell, hoveredCell);
+                            //Debug.Log(string.Join(", ", trace));
+                        }
+                    }
+
+                }
+            }
+            if (trace != null) {
+                foreach (var cell in trace) {
+                    HighlightTiles(cell, traceColor);
+                }
+            }
+            if (clickedTime >= 1) {
+                HighlightTiles(startCell, highlightColor);
+            }
+            if (clickedTime >= 2) {
+                HighlightTiles(endCell, highlightColor);
+            }
+            HighlightTiles(hoveredCell, cursorColor);
+            lastHoveredCell = hoveredCell;
+
+            if (Input.GetMouseButtonDown(1)) {
+                if (movingBoundary != null) {
+                    foreach (var cell in movingBoundary) {
+                        HighlightTiles(cell, normalColor);
+                    }
+                }
+                if (trace != null) {
+                    foreach (var cell in trace) {
+                        HighlightTiles(cell, normalColor);
+                    }
+                }
+                HighlightTiles(startCell, normalColor);
+                HighlightTiles(endCell, normalColor);
+                startCell = new Vector3Int(9999, 9999, 9999);
+                endCell = new Vector3Int(9999, 9999, 9999);
+                movingBoundary = null;
+                trace = null;
+                clickedTime = 0;
+            }
+        }
     }
 
 }

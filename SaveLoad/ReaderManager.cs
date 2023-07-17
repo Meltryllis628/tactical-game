@@ -32,6 +32,14 @@ namespace TachGame {
             return message;
         }
 
+        public override void UpdateElse() {
+            throw new System.NotImplementedException();
+        }
+
+        public override void UpdateMessage(Message currentMessage) {
+            throw new System.NotImplementedException();
+        }
+
         private void Start() {
             Debug.Log(Instance.logText);
         }
