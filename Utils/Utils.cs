@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 
-namespace Assets.Scripts.Utils
-{
-    internal class Utils
-    {
+namespace TachGame {
+    internal class Utils {
         public Hashtable ht = new Hashtable();
 
     }

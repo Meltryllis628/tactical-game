@@ -5,18 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Scripts {
+namespace TachGame {
     public class Message {
         private ManagerCode target;
         public ManagerCode Target { get { return target; } set { target = value; } }
         private MessagesCode what;
         public MessagesCode ID { get { return what; } set { what = value; } }
-        private int arg1;
-        private int arg2;
-        private int arg3;
-        private object obj1;
-        private object obj2;
-        private object obj3;
+        public int Arg1 { get; set; }
+        public int Arg2 { get; set; }
+        public int Arg3 { get; set; }
+        public object Obj1 { get; set; }
+        public object Obj2 { get; set; }
+        public object Obj3 { get; set; }
+
         public Message(ManagerCode target, MessagesCode what) {
             Target = target;
             ID = what;

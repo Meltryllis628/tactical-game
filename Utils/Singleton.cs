@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts {
-    
+namespace TachGame {
+
     public class UnitySingleton<T> : MonoBehaviour
             where T : Component {
         private static T instance;

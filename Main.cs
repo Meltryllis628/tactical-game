@@ -1,10 +1,10 @@
-﻿using Assets.Script;
+﻿
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Assets.Scripts {
+namespace Assets.TachGame {
     class Main:MonoBehaviour
     {
         static void Start(string[] args)

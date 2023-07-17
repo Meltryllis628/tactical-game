@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assets.Scripts {
+namespace TachGame {
     public class MessageQueue {
         private ConcurrentQueue<Message> messageQueue = new ConcurrentQueue<Message>();
         public Message Peek() {

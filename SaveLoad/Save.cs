@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
-namespace Assets.Scripts {
+namespace TachGame {
 
     [Serializable]
     public class Save {
@@ -13,12 +13,13 @@ namespace Assets.Scripts {
 
         public string SavePath { get => savePath; set => savePath = value; }
 
-        public void SaveData(string name) {
+        public void SaveData(string name = null) {
             // 创建 XML 序列化器
             XmlSerializer serializer = new XmlSerializer(GetType());
-            string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-            SavePath = path + "\\" + name + ".xml";
-
+            if (name != null) {
+                string path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+                SavePath = path + "\\" + name + ".xml";
+            }
             // 创建文件流，用于写入 XML 数据
             using (TextWriter writer = new StreamWriter(SavePath)) {
                 // 使用序列化器将对象数据写入文件

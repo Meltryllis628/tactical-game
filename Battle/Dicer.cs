@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Script {    
+namespace TachGame {    
     public class Dicer : MonoBehaviour {
         
     }

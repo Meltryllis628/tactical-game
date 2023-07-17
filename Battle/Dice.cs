@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Random = System.Random;
 
-namespace Assets.Script {
+namespace TachGame {
 
     internal class Dice {
         int maxValue = 20;
